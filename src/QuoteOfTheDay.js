@@ -6,6 +6,7 @@ class QuoteOfTheDay extends Component {
   constructor() {
     super();
     this.state = {};
+    this.getQuote = this.getQuote.bind(this);
   }
 
   getQuote() {

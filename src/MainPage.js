@@ -22,10 +22,10 @@ class MainPage extends Component {
             <nav>
               <section >
                   <span>Login with:</span>
-                <a href="http://127.0.0.1:3001/auth/youtube/login" id="loginTitle">
+                <a href="https://hidden-reaches-26134.herokuapp.com/auth/youtube/login" id="loginTitle">
                   <img src="https://www.watchmanadvisors.com/wp-content/uploads/2013/12/youtube-icon.png" alt="Error!!! Did not load!" width="38" />
                 </a>
-                <a href="http://127.0.0.1:3001/auth/youtube/signout" id="logoutLink">
+                <a href="https://hidden-reaches-26134.herokuapp.com/auth/youtube/signout" id="logoutLink">
                   <button className="pure-button"> Sign Out </button>
                 </a>
               </section>

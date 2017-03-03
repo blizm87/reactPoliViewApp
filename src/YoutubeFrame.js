@@ -22,7 +22,7 @@ class YoutubeFrame extends Component {
 
   handleSearchReq(){
     const keyword = this.state.searchReq
-    const url = 'http://127.0.0.1:3001/auth/searchVid?keyword=' + keyword
+    const url = 'https://hidden-reaches-26134.herokuapp.com/auth/searchVid?keyword=' + keyword
 
     fetch(url)
       // .then( res => res.json() )
