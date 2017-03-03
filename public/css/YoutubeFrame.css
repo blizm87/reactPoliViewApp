@@ -1,0 +1,21 @@
+#youtube {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#searchFrame {
+  border: 1px solid black;
+}
+
+#searchInput {
+  vertical-align: top;
+  margin-top: .5em;
+  width: 85%;
+  height: 1.5em;
+}
+
+#searchButton {
+  background: url("http://dcervin.com/i/2017/02/light-blue-wallpapers-desktop.jpg") no-repeat fixed center;
+  background-size: cover;
+  border: none;
+}

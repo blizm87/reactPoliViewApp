@@ -1,0 +1,15 @@
+#dailyQuote {
+  text-align: center;
+}
+
+#dailyQuote>h3 {
+  font-size: 2em;
+  text-decoration: underline;
+}
+
+#dailyQuote>p {
+  margin-top: -1em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+

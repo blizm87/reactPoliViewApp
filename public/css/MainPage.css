@@ -1,0 +1,88 @@
+body{
+  background: url("http://dcervin.com/i/2017/02/light-blue-wallpapers-desktop.jpg") no-repeat fixed center;
+  background-size: cover;
+}
+h1 {
+  margin-left: 1.5%;
+  display: inline-block;
+  font-size: 3em;
+}
+
+nav {
+  float: right;
+}
+
+nav>section {
+  padding-top: 2.5em;
+}
+
+nav>section>span {
+  font-size: 1.5em;
+  vertical-align: bottom;
+}
+
+.main_Container {
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 1px solid black;
+}
+
+.pure-g {
+  border-top: 1px solid black;
+  background: url("http://dcervin.com/i/2017/02/light-blue-wallpapers-desktop.jpg") no-repeat fixed center;
+  background-size: cover;
+}
+
+.pure-u-1-3 {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.pure-u-md-1-3 {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#youtubeFrame_Container {
+/*  background-color: rgba(255, 0, 0, .4);
+*/}
+
+#currentEvents_Container {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+/*  background-color: white;
+*/}
+
+#misc_Container {
+/*  background-color: rgba(0, 0, 255, .4);
+*/}
+
+#loginTitle {
+  text-decoration: none;
+  vertical-align: bottom;
+}
+
+#loginTitle>img {
+  vertical-align: bottom;
+  margin-right:2em;
+  margin-left: 2em;
+}
+
+#logoutLink{
+
+}
+
+.mainRender-appear {
+  opacity: 0.01;
+}
+
+.mainRender-appear.mainRender-appear-active {
+   opacity: 1;
+   transition: opacity 2000ms ease-in;
+}
+
+#spinGlobe {
+  float: right;
+}

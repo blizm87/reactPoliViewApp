@@ -1,0 +1,52 @@
+.hiddenControlNone {
+  display: none;
+}
+
+.hiddenControl{
+  visibility: hidden;
+  opacity: 0;
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fadeIn {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+#misc {
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+#startTrivia {
+  margin-left: 30%;
+  border-radius: 15px;
+}
+
+#startBtn{
+  margin-left: 15%;
+  border-radius: 15px;
+}
+
+#catSelect{
+  margin-left: 2%;
+  border-radius: 15px;
+  font-size: 1.3em;
+}
+
+/*.buttonRender-appear {
+  opacity: 0.01;
+}
+
+.buttonRender-appear.buttonRender-appear-active {
+   opacity: 1;
+   transition: opacity 5000ms ease-in;
+}*/
+
+/*        <GroupTransition transitionName="buttonRender"
+          transitionAppear={false} transitionAppearTimeout={5000}
+          transitionEnter={false} transitionLeave={false}>*/
