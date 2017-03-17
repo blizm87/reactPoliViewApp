@@ -41,7 +41,7 @@ class YoutubeFrame extends Component {
           frameBorder="0">
         </iframe>
           <input type="text" onChange={this.handleChange} id="searchInput" placeholder="Search For Videos" />
-          <button onClick={this.handleSearchReq} id="searchButton"><img className="pure-img" src="http://icons.iconarchive.com/icons/treetog/i/256/Search-icon.png" width="40" alt="Error in loading" /></button>
+          <button onClick={this.handleSearchReq} id="searchButton"><img className="pure-img" src="assets/searchIcon.png" width="40" alt="Error in loading" /></button>
         <br/>
         <div id="searchFrame">
           Frame for videos
