@@ -17,8 +17,6 @@ class Misc extends Component {
   }
 
   renderTriviaGame(category) {
-    //   const data = JSON.parse(body).results[0];
-    //   var q = entities.decode(data.question);
     document.getElementById('preGameNotice').className = 'fadeOut'
     this.timeout = setTimeout( () => {
       document.getElementById('preGameNotice').className = 'hiddenControlNone'
