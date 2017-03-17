@@ -10,7 +10,6 @@ class QuoteOfTheDay extends Component {
   }
 
   getQuote() {
-
     const url = "https://hidden-reaches-26134.herokuapp.com/quote";
     fetch(url).then( res => res.json() ).then( data => {
       let content = data[0].content;
