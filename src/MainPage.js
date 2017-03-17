@@ -18,12 +18,12 @@ class MainPage extends Component {
             <h1>
               PoliView.com
             </h1>
-                  <img id="pure-img" src="../public/assets/earth-spinning-rotating-animation-23.gif" alt="Error!!! Did not load!" width="75" />
+                  <img id="pure-img" src="assets/earth-spinning.gif" alt="Error!!! Did not load!" width="75" />
             <nav>
               <section >
                   <span>Login with:</span>
                 <a href="https://hidden-reaches-26134.herokuapp.com/auth/youtube/login" id="loginTitle">
-                  <img src="../public/assets/youtube-icon.png" alt="Error!!! Did not load!" width="38" />
+                  <img src="assets/youtube-icon.png" alt="Error!!! Did not load!" width="38" />
                 </a>
                 <a href="https://hidden-reaches-26134.herokuapp.com/auth/youtube/signout" id="logoutLink">
                   <button className="pure-button"> Sign Out </button>
