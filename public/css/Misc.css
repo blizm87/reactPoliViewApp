@@ -17,6 +17,13 @@
   transition: opacity 1s ease-in-out;
 }
 
+.trivBtnSelect {
+  margin-bottom: .5em;
+  vertical-align: bottom;
+  border-radius: 15px;
+  display: block;
+}
+
 #misc {
   margin-right: 5%;
   margin-left: 5%;
@@ -47,7 +54,19 @@
 #triviaGameInner {
   border: 1px solid black;
   width: 400px;
-  height: 280px;
+  height: 300px;
+}
+
+#trivQA {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+#trivQAHeader {
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  display: block;
 }
 
 /*.buttonRender-appear {

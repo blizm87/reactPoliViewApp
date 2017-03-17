@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import entities from 'html-entities';
 import '../public/css/Misc.css';
 
 class Misc extends Component {
@@ -6,8 +7,7 @@ class Misc extends Component {
     super();
     this.state = {
       catDefault: '9',
-      trivQuestion: '',
-      trivAnswer: ''
+      trivData: {}
     }
     this.renderTriviaGame = this.renderTriviaGame.bind(this);
     this.renderTriviaControls = this.renderTriviaControls.bind(this);
@@ -20,15 +20,25 @@ class Misc extends Component {
     //   const data = JSON.parse(body).results[0];
     //   var q = entities.decode(data.question);
     document.getElementById('preGameNotice').className = 'fadeOut'
-    const url = `https://hidden-reaches-26134.herokuapp.com/?trivQuery=https://www.opentdb.com/api.php?amount=1&category=${category}&difficulty=medium&type=multiple`
     this.timeout = setTimeout( () => {
       document.getElementById('preGameNotice').className = 'hiddenControlNone'
       document.getElementById('trivQA').className = 'hiddenControl'
+      const url = `https://hidden-reaches-26134.herokuapp.com/?category=${this.state.catDefault}`
       fetch(url).then( res => res.json() ).then( data => {
-        console.log(data)
+        let question = entities.AllHtmlEntities.decode(data.data.question);
+        let correct_answer = entities.AllHtmlEntities.decode(data.data.correct_answer);
+        let incorrectOne = entities.AllHtmlEntities.decode(data.data.incorrect_answers[0]);
+        let incorrectTwo = entities.AllHtmlEntities.decode(data.data.incorrect_answers[1]);
+        let incorrectThree = entities.AllHtmlEntities.decode(data.data.incorrect_answers[2]);
+        console.log(data.data)
         this.setState({
-          trivQuestion: data.data.question,
-          trivAnswer: data.data.correct_answer
+          trivData: {
+            question: question,
+            correct_answer: correct_answer,
+            incorrectOne: incorrectOne,
+            incorrectTwo: incorrectTwo,
+            incorrectThree: incorrectThree
+          }
         })
         document.getElementById('trivQA').className = 'fadeIn'
       });
@@ -86,8 +96,14 @@ class Misc extends Component {
           <div id="triviaGameInner">
             <p id="preGameNotice">Press Start when ready</p>
             <div id="trivQA" className="hiddenControlNone">
-              <p>{this.state.trivQuestion}</p>
-              <p>{this.state.trivAnswer}</p>
+              <h4 id="trivQAHeader">Question</h4>
+              <p>{this.state.trivData.question}</p>
+              <div id="mcAnswers">
+                <button className="pure-button trivBtnSelect">Correct answer: {this.state.trivData.correct_answer}</button>
+                <button className="pure-button trivBtnSelect">Incorrect answer: {this.state.trivData.incorrectOne}</button>
+                <button className="pure-button trivBtnSelect">Incorrect answer: {this.state.trivData.incorrectTwo}</button>
+                <button className="pure-button trivBtnSelect">Incorrect answer: {this.state.trivData.incorrectThree}</button>
+              </div>
             </div>
           </div>
         </div>
