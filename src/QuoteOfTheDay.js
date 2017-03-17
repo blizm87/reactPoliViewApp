@@ -10,7 +10,8 @@ class QuoteOfTheDay extends Component {
   }
 
   getQuote() {
-    const url = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";
+
+    const url = "https://hidden-reaches-26134.herokuapp.com/quote";
     fetch(url).then( res => res.json() ).then( data => {
       let content = data[0].content;
       let rmPTag = content.replace("<p>", '');
