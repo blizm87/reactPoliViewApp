@@ -28,7 +28,8 @@ class Misc extends Component {
         let incorrectOne = entities.AllHtmlEntities.decode(data.data.incorrect_answers[0]);
         let incorrectTwo = entities.AllHtmlEntities.decode(data.data.incorrect_answers[1]);
         let incorrectThree = entities.AllHtmlEntities.decode(data.data.incorrect_answers[2]);
-        console.log(data.data)
+        console.log(data)
+        // console.log(data.data)
         this.setState({
           trivData: {
             question: question,
