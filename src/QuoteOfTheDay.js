@@ -10,14 +10,14 @@ class QuoteOfTheDay extends Component {
   }
 
   getQuote() {
-    const url = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";
-    fetch(url).then( res => res.json() ).then( data => {
-      let content = data[0].content;
+    // const url = "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1";
+    fetch('https://hidden-reaches-26134.herokuapp.com/quote').then( res => res.json() ).then( data => {
+      let content = data.data[0].content;
       let rmPTag = content.replace("<p>", '');
       let clearContent = rmPTag.replace("</p>", '');
       let newContent = entities.AllHtmlEntities.decode(clearContent);
       this.setState({
-        quote_author: data[0].title,
+        quote_author: data.data[0].title,
         quote_content: newContent
       });
     });
