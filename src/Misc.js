@@ -21,8 +21,9 @@ class Misc extends Component {
     this.timeout = setTimeout( () => {
       document.getElementById('preGameNotice').className = 'hiddenControlNone'
       document.getElementById('trivQA').className = 'hiddenControl'
-      const url = `https://hidden-reaches-26134.herokuapp.com/?category=${this.state.catDefault}`
+      const url = `https://hidden-reaches-26134.herokuapp.com/trivGame?category=${this.state.catDefault}`
       fetch(url).then( res => res.json() ).then( data => {
+        console.log(data)
         let question = entities.AllHtmlEntities.decode(data.data.question);
         let correct_answer = entities.AllHtmlEntities.decode(data.data.correct_answer);
         let incorrectOne = entities.AllHtmlEntities.decode(data.data.incorrect_answers[0]);
