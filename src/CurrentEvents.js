@@ -35,7 +35,7 @@ class CurrentEvents extends Component {
         <article className="newsArticle"  key={i}>
           <h4 key={i}>published by: {article.author}</h4>
           <p key={i+1}>{article.title}</p>
-          <a href={article.url}>
+          <a href={article.url} target={article.url}>
             <img key={i+2} className="pure-img" src={article.urlToImage} alt="Error!!! Did not load!" width="450" height="300"/>
           </a>
           <p key={i+3}>{article.description}</p>

@@ -40,11 +40,13 @@ class YoutubeFrame extends Component {
           src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com"
           frameBorder="0">
         </iframe>
-          <input type="text" onChange={this.handleChange} id="searchInput" placeholder="Search For Videos" />
-          <button onClick={this.handleSearchReq} id="searchButton"><img className="pure-img" src="assets/searchIcon.png" width="40" alt="Error in loading" /></button>
+            <input type="text" onChange={this.handleChange} id="searchInput" placeholder="Search For Videos" />
+            <button onClick={this.handleSearchReq} id="searchButton">
+              <img className="pure-img" src="assets/searchIcon.png" width="40" alt="Error in loading" />
+            </button>
         <br/>
         <div id="searchFrame">
-          Frame for videos
+          <p>Frame for videos</p>
         </div>
       </div>
     );

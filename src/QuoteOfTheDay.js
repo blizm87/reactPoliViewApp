@@ -28,13 +28,11 @@ class QuoteOfTheDay extends Component {
 
   render() {
     return (
-      <div className="pure-g">
-        <div className="pure-u-5-5">
-          <div id="dailyQuote">
-            <h3>QUOTE OF THE DAY</h3>
-            <p>by: {this.state.quote_author}</p>
-            <p>{this.state.quote_content}</p>
-          </div>
+      <div id="quoteOfTheDay">
+        <div id="dailyQuote">
+          <h3>QUOTE OF THE DAY</h3>
+          <p>by: {this.state.quote_author}</p>
+          <p>{this.state.quote_content}</p>
         </div>
       </div>
     );

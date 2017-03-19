@@ -10,7 +10,8 @@
 #searchInput {
   vertical-align: top;
   margin-top: .5em;
-  width: 85%;
+  width: 80%;
+  max-width: 400px;
   height: 1.5em;
 }
 

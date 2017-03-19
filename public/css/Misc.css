@@ -30,7 +30,8 @@
 }
 
 #startTrivia {
-  margin-left: 30%;
+  margin-top: 1em;
+  margin-left: 9em;
   border-radius: 15px;
 }
 
@@ -68,16 +69,3 @@
   text-decoration: underline;
   display: block;
 }
-
-/*.buttonRender-appear {
-  opacity: 0.01;
-}
-
-.buttonRender-appear.buttonRender-appear-active {
-   opacity: 1;
-   transition: opacity 5000ms ease-in;
-}*/
-
-/*        <GroupTransition transitionName="buttonRender"
-          transitionAppear={false} transitionAppearTimeout={5000}
-          transitionEnter={false} transitionLeave={false}>*/
