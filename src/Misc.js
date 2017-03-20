@@ -7,13 +7,28 @@ class Misc extends Component {
     super();
     this.state = {
       catDefault: '9',
-      trivData: {}
+      trivQuery: {},
+      trivAnswers: [],
+      mixedAnswers: []
     }
+    this.mixAnswers = this.mixAnswers.bind(this);
     this.renderTriviaGame = this.renderTriviaGame.bind(this);
     this.renderTriviaControls = this.renderTriviaControls.bind(this);
     this.hidePlayTrivia = this.hidePlayTrivia.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  mixAnswers() {
+    let i = 0;
+    while( i < 4){
+      let num = Math.floor(Math.random() * this.state.trivAnswers.length);
+      let result = this.state.trivAnswers.splice(num, 1)
+      this.state.mixedAnswers.push(result[0])
+      ++i
+    }
+    console.log("I am mixed Answers")
+    console.log(this.state.mixedAnswers)
   }
 
   renderTriviaGame(category) {
@@ -25,20 +40,24 @@ class Misc extends Component {
       fetch(url).then( res => res.json() ).then( data => {
         console.log(data)
         let question = entities.AllHtmlEntities.decode(data.data.question);
-        let correct_answer = entities.AllHtmlEntities.decode(data.data.correct_answer);
-        let incorrectOne = entities.AllHtmlEntities.decode(data.data.incorrect_answers[0]);
-        let incorrectTwo = entities.AllHtmlEntities.decode(data.data.incorrect_answers[1]);
-        let incorrectThree = entities.AllHtmlEntities.decode(data.data.incorrect_answers[2]);
-        console.log(data.data)
+        let correctAnswer = {
+          answer: entities.AllHtmlEntities.decode(data.data.correct_answer),
+          isRight: true
+        }
+        this.state.trivAnswers.push(correctAnswer)
+        data.data.incorrect_answers.map((incAnswer, i) => {
+          let incorrectAnswer = {
+            answer: entities.AllHtmlEntities.decode(incAnswer),
+            isRight: false
+          }
+          this.state.trivAnswers.push(incorrectAnswer)
+        })
         this.setState({
-          trivData: {
-            question: question,
-            correct_answer: correct_answer,
-            incorrectOne: incorrectOne,
-            incorrectTwo: incorrectTwo,
-            incorrectThree: incorrectThree
+          trivQuery: {
+            question: question
           }
         })
+        this.mixAnswers();
         document.getElementById('trivQA').className = 'fadeIn'
       });
       this.timeout = null
@@ -69,12 +88,20 @@ class Misc extends Component {
   handleChange(evt) {
     this.setState({
       catDefault: evt.target.value,
+      trivQuery: {},
+      trivAnswers: [],
+      mixedAnswers: []
     })
     const category = evt.target.value
     this.renderTriviaGame(category)
   }
 
   handleClick(){
+    this.setState({
+      trivQuery: {},
+      trivAnswers: [],
+      mixedAnswers: []
+    })
     const category = this.state.catDefault
     this.renderTriviaGame(category)
   }
@@ -86,6 +113,19 @@ class Misc extends Component {
   }
 
   render() {
+    let mixSelection = this.state.mixedAnswers.map((obj, i) => {
+      console.log("I am object from render answers")
+      console.log(obj)
+      if(obj.isRight == true){
+        return (
+          <button className="pure-button trivBtnSelect rightAnswer" key={i+1}>{obj.answer}</button>
+        )
+      } else {
+          return (
+            <button className="pure-button trivBtnSelect wrongAnswer" key={i+1}>{obj.answer}</button>
+          );
+      }
+    });
     return (
       <div id="misc">
         <div className="hiddenControlNone" id="triviaGame">
@@ -96,12 +136,9 @@ class Misc extends Component {
             <p id="preGameNotice">Press Start when ready</p>
             <div id="trivQA" className="hiddenControlNone">
               <h4 id="trivQAHeader">Question</h4>
-              <p>{this.state.trivData.question}</p>
+              <p>{this.state.trivQuery.question}</p>
               <div id="mcAnswers">
-                <button className="pure-button trivBtnSelect">Correct answer: {this.state.trivData.correct_answer}</button>
-                <button className="pure-button trivBtnSelect">Incorrect answer: {this.state.trivData.incorrectOne}</button>
-                <button className="pure-button trivBtnSelect">Incorrect answer: {this.state.trivData.incorrectTwo}</button>
-                <button className="pure-button trivBtnSelect">Incorrect answer: {this.state.trivData.incorrectThree}</button>
+                {mixSelection}
               </div>
             </div>
           </div>

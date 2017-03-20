@@ -24,6 +24,14 @@
   display: block;
 }
 
+.rightAnswer {
+  background-color: limegreen;
+}
+
+.wrongAnswer {
+  background-color: orange;
+}
+
 #misc {
   margin-right: 5%;
   margin-left: 5%;
