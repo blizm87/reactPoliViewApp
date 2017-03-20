@@ -9,7 +9,8 @@ class Misc extends Component {
       catDefault: '9',
       trivQuery: {},
       trivAnswers: [],
-      mixedAnswers: []
+      mixedAnswers: [],
+      turnCounter: 0
     }
     this.checkAnswer = this.checkAnswer.bind(this);
     this.mixAnswers = this.mixAnswers.bind(this);
@@ -22,17 +23,28 @@ class Misc extends Component {
 
   checkAnswer(evt) {
     if(evt.target.id === 'mcBtn'){
-      console.log("i am click")
+      this.state.turnCounter = this.state.turnCounter + 1
       if(evt.target.className === 'pure-button trivBtnSelect rightAnswer') {
           evt.target.className = "pure-button trivBtnSelect rightAnswer clickRightAnswer"
           document.getElementById('trivQA').className = 'fadeOut'
           this.timeout = setTimeout( () => {
             this.renderTriviaGame(this.state.catDefault)
+            this.state.turnCounter = 0
             this.timeout = null
           }, 1000)
       } else {
+          console.log(this.state.gameCounter)
           evt.target.className = "pure-button trivBtnSelect wrongAnswer clickWrongAnswer"
+          if(this.state.turnCounter === 2){
+            document.getElementById('trivQA').className = 'fadeOut'
+            this.timeout = setTimeout( () => {
+              this.renderTriviaGame(this.state.catDefault)
+              this.state.turnCounter = 0
+              this.timeout = null
+            }, 1000)
+          }
         }
+
     }
   }
 
@@ -148,12 +160,14 @@ class Misc extends Component {
           <div>
             <h3>Trivia Game</h3>
           </div>
-          <div id="triviaGameInner">
-            <div id="trivQA" className="hiddenControlNone">
-              <h4 id="trivQAHeader">Question</h4>
-              <p>{this.state.trivQuery.question}</p>
-              <div id="mcAnswers" onClick={this.checkAnswer}>
-                {mixSelection}
+          <div className="pure-g">
+            <div id="triviaGameInner" className="pure-u-1">
+              <div id="trivQA" className="hiddenControlNone">
+                <h4 id="trivQAHeader">Question</h4>
+                <p>{this.state.trivQuery.question}</p>
+                <div id="mcAnswers" onClick={this.checkAnswer}>
+                  {mixSelection}
+                </div>
               </div>
             </div>
           </div>
@@ -166,7 +180,7 @@ class Misc extends Component {
           <option value="14">Television</option>
           <option value="22">Geography</option>
           <option value="23">History</option>
-          <option value="18">Science: Computers</option>
+          <option value="18">Comp.science</option>
           <option value="21">Sports</option>
         </select>
         <button className="pure-button" id="startTrivia" onClick={this.hidePlayTrivia}>Play Trivia</button>
