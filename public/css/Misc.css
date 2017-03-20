@@ -24,11 +24,11 @@
   display: block;
 }
 
-.rightAnswer {
+.clickRightAnswer {
   background-color: limegreen;
 }
 
-.wrongAnswer {
+.clickWrongAnswer {
   background-color: orange;
 }
 

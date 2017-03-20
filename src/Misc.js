@@ -11,12 +11,29 @@ class Misc extends Component {
       trivAnswers: [],
       mixedAnswers: []
     }
+    this.checkAnswer = this.checkAnswer.bind(this);
     this.mixAnswers = this.mixAnswers.bind(this);
     this.renderTriviaGame = this.renderTriviaGame.bind(this);
     this.renderTriviaControls = this.renderTriviaControls.bind(this);
     this.hidePlayTrivia = this.hidePlayTrivia.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  checkAnswer(evt) {
+    if(evt.target.id === 'mcBtn'){
+      console.log("i am click")
+      if(evt.target.className === 'pure-button trivBtnSelect rightAnswer') {
+          evt.target.className = "pure-button trivBtnSelect rightAnswer clickRightAnswer"
+          document.getElementById('trivQA').className = 'fadeOut'
+          this.timeout = setTimeout( () => {
+            this.renderTriviaGame(this.state.catDefault)
+            this.timeout = null
+          }, 1000)
+      } else {
+          evt.target.className = "pure-button trivBtnSelect wrongAnswer clickWrongAnswer"
+        }
+    }
   }
 
   mixAnswers() {
@@ -27,18 +44,18 @@ class Misc extends Component {
       this.state.mixedAnswers.push(result[0])
       ++i
     }
-    console.log("I am mixed Answers")
-    console.log(this.state.mixedAnswers)
   }
 
   renderTriviaGame(category) {
-    document.getElementById('preGameNotice').className = 'fadeOut'
+    this.setState({
+      trivQuery: {},
+      trivAnswers: [],
+      mixedAnswers: []
+    })
     this.timeout = setTimeout( () => {
-      document.getElementById('preGameNotice').className = 'hiddenControlNone'
       document.getElementById('trivQA').className = 'hiddenControl'
       const url = `https://hidden-reaches-26134.herokuapp.com/trivGame?category=${this.state.catDefault}`
       fetch(url).then( res => res.json() ).then( data => {
-        console.log(data)
         let question = entities.AllHtmlEntities.decode(data.data.question);
         let correctAnswer = {
           answer: entities.AllHtmlEntities.decode(data.data.correct_answer),
@@ -52,17 +69,16 @@ class Misc extends Component {
           }
           this.state.trivAnswers.push(incorrectAnswer)
         })
+        this.mixAnswers();
         this.setState({
           trivQuery: {
             question: question
           }
         })
-        this.mixAnswers();
         document.getElementById('trivQA').className = 'fadeIn'
       });
       this.timeout = null
     }, 1000)
-
   }
 
   renderTriviaControls(){
@@ -86,24 +102,24 @@ class Misc extends Component {
 }
 
   handleChange(evt) {
+    document.getElementById('trivQA').className = 'fadeOut'
     this.setState({
       catDefault: evt.target.value,
-      trivQuery: {},
-      trivAnswers: [],
-      mixedAnswers: []
     })
     const category = evt.target.value
-    this.renderTriviaGame(category)
+    this.timeout = setTimeout( () => {
+      this.renderTriviaGame(category)
+      this.timeout = null
+    }, 1000)
   }
 
   handleClick(){
-    this.setState({
-      trivQuery: {},
-      trivAnswers: [],
-      mixedAnswers: []
-    })
-    const category = this.state.catDefault
-    this.renderTriviaGame(category)
+    document.getElementById('trivQA').className = 'fadeOut'
+    this.timeout = setTimeout( () => {
+      const category = this.state.catDefault
+      this.renderTriviaGame(category)
+      this.timeout = null
+    }, 1000)
   }
 
   componentWillUnmount() {
@@ -111,18 +127,18 @@ class Misc extends Component {
       clearTimeout(this.timeout)
     }
   }
-
+    // document.getElementById('preGameNotice').className = 'fadeOut'
+    //   document.getElementById('preGameNotice').className = 'hiddenControlNone'
+    //         <p id="preGameNotice">Press Start when ready</p>
   render() {
     let mixSelection = this.state.mixedAnswers.map((obj, i) => {
-      console.log("I am object from render answers")
-      console.log(obj)
-      if(obj.isRight == true){
+      if(obj.isRight === true){
         return (
-          <button className="pure-button trivBtnSelect rightAnswer" key={i+1}>{obj.answer}</button>
+          <button className="pure-button trivBtnSelect rightAnswer" id="mcBtn" key={i+1}>{obj.answer}</button>
         )
       } else {
           return (
-            <button className="pure-button trivBtnSelect wrongAnswer" key={i+1}>{obj.answer}</button>
+            <button className="pure-button trivBtnSelect wrongAnswer" id="mcBtn" key={i+1}>{obj.answer}</button>
           );
       }
     });
@@ -133,11 +149,10 @@ class Misc extends Component {
             <h3>Trivia Game</h3>
           </div>
           <div id="triviaGameInner">
-            <p id="preGameNotice">Press Start when ready</p>
             <div id="trivQA" className="hiddenControlNone">
               <h4 id="trivQAHeader">Question</h4>
               <p>{this.state.trivQuery.question}</p>
-              <div id="mcAnswers">
+              <div id="mcAnswers" onClick={this.checkAnswer}>
                 {mixSelection}
               </div>
             </div>
